@@ -1,0 +1,77 @@
+{
+  "hash": "527f86b2",
+  "browserHash": "14d1057a",
+  "optimized": {
+    "react": {
+      "src": "../../node_modules/react/index.js",
+      "file": "react.js",
+      "fileHash": "5ecbda26",
+      "needsInterop": true
+    },
+    "react-dom/client": {
+      "src": "../../node_modules/react-dom/client.js",
+      "file": "react-dom_client.js",
+      "fileHash": "708e0da1",
+      "needsInterop": true
+    },
+    "styled-normalize": {
+      "src": "../../node_modules/styled-normalize/dist/index.js",
+      "file": "styled-normalize.js",
+      "fileHash": "973a5def",
+      "needsInterop": true
+    },
+    "react-redux": {
+      "src": "../../node_modules/react-redux/es/index.js",
+      "file": "react-redux.js",
+      "fileHash": "b12a4843",
+      "needsInterop": false
+    },
+    "react-router-dom": {
+      "src": "../../node_modules/react-router-dom/dist/index.js",
+      "file": "react-router-dom.js",
+      "fileHash": "68c5e55a",
+      "needsInterop": false
+    },
+    "@reduxjs/toolkit": {
+      "src": "../../node_modules/@reduxjs/toolkit/dist/redux-toolkit.esm.js",
+      "file": "@reduxjs_toolkit.js",
+      "fileHash": "e404d803",
+      "needsInterop": false
+    },
+    "styled-components": {
+      "src": "../../node_modules/styled-components/dist/styled-components.browser.esm.js",
+      "file": "styled-components.js",
+      "fileHash": "aecf6b14",
+      "needsInterop": false
+    },
+    "@supabase/supabase-js": {
+      "src": "../../node_modules/@supabase/supabase-js/dist/module/index.js",
+      "file": "@supabase_supabase-js.js",
+      "fileHash": "a1e0644e",
+      "needsInterop": false
+    }
+  },
+  "chunks": {
+    "browser-ponyfill-AQPPP7XY": {
+      "file": "browser-ponyfill-AQPPP7XY.js"
+    },
+    "chunk-PRK46SJB": {
+      "file": "chunk-PRK46SJB.js"
+    },
+    "chunk-NDZ5YWKO": {
+      "file": "chunk-NDZ5YWKO.js"
+    },
+    "chunk-XSNER6PN": {
+      "file": "chunk-XSNER6PN.js"
+    },
+    "chunk-FLAVOKRJ": {
+      "file": "chunk-FLAVOKRJ.js"
+    },
+    "chunk-SM72FQKO": {
+      "file": "chunk-SM72FQKO.js"
+    },
+    "chunk-AC2VUBZ6": {
+      "file": "chunk-AC2VUBZ6.js"
+    }
+  }
+}
