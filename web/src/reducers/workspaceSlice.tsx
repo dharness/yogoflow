@@ -11,14 +11,10 @@ enum LoadingState {
 
 interface WorkspaceState {
   loadingStatuses: { [key: string]: LoadingState };
-  activeFrameId?: string;
-  frameIdToClear: string;
 }
 
 const initialState = {
   loadingStatuses: {},
-  activeFrameId: "default",
-  frameIdToClear: "",
 } as WorkspaceState;
 
 const workspaceSlice = createSlice({
