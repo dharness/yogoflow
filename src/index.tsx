@@ -5,16 +5,16 @@ import { Normalize } from "styled-normalize";
 import { store } from "./app/store.ts";
 import { Provider } from "react-redux";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Login from "./components/Login.tsx";
+import Profile from "./components/Profile.tsx";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Login />,
+    element: <App />,
   },
   {
-    path: "/app",
-    element: <App />,
+    path: "/profile",
+    element: <Profile />,
   },
 ]);
 
