@@ -5,6 +5,7 @@ Stay fit during those long work days with a guided exercise routine.
 ### Local Development:
 
 ```
+cd web
 npm install
 npm run dev
 ```
