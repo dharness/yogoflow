@@ -1,7 +1,15 @@
+import PoseMeter from "./components/PoseMeter";
+import ReferencePose from "./components/ReferencePose";
+import VideoFeed from "./components/VideoFeed";
+
 function App() {
   return (
     <>
-      <div>Hello</div>
+      <div>
+        <PoseMeter></PoseMeter>
+        <ReferencePose></ReferencePose>
+        <VideoFeed></VideoFeed>
+      </div>
     </>
   );
 }
