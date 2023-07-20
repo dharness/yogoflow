@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const StyledHeader = styled.div`
-  background: yellow;
+  background: red;
   grid-row: 1/2;
   grid-column: 1/3;
 `;
