@@ -9,6 +9,7 @@ lerna-debug.log*
 
 # Python
 .venv
+__pycache__/
 
 node_modules
 dist
