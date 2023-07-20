@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import Header from "./components/Header";
 import SessionPage from "./components/SessionPage";
-import SidebarNav from "./components/SidebarNav";
 
 const AppLayout = styled.div`
   background: plum;
@@ -20,7 +19,6 @@ function App() {
     <>
       <AppLayout>
         <Header></Header>
-        {/* <SidebarNav></SidebarNav> */}
         <SessionPage />
       </AppLayout>
     </>
