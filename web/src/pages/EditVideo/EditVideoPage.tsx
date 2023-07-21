@@ -38,7 +38,7 @@ const tabConfigs = [
 
 // --- Styles ---
 
-const Layout = styled.div`
+const Content = styled.div`
   display: flex;
   flex-direction: column;
   padding: 0px 35px 35px 35px;
@@ -48,42 +48,44 @@ const Layout = styled.div`
   justify-content: space-between;
 `;
 
-// --- Helpers ---
-
-const renderSection = (sectionId: EditSectionIdEnum) => {
-  switch (sectionId) {
-    case EditSectionIdEnum.Captions:
-      return <CaptionsSection />;
-    case EditSectionIdEnum.Music:
-      return <MusicSection />;
-    case EditSectionIdEnum.Download:
-      return <DownloadSection />;
-  }
-};
+const PageLayout = styled.div`
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+`;
 
 // --- Component ---
 
 const EditVideoPage = () => {
   const dispatch = useAppDispatch();
   const sectionId = useSelector(selectEditSectionId);
+  const activeConfig = tabConfigs.find(({ id }) => id === sectionId);
+
+  const onTabClicked = () => {
+    console.log("tab cliekce");
+  };
 
   return (
     <Panel
       titleText="Style your video"
       onCloseClick={() => dispatch(sessionCancelled())}
     >
-      <TabBar activeTabIndex={0}>
-        {tabConfigs.map((tabConfig) => (
-          <TabBarItem
-            key={tabConfig.id}
-            title={tabConfig.title}
-            symbol={tabConfig.symbol}
-            isActive={sectionId === tabConfig.id}
-          />
-        ))}
-      </TabBar>
+      <PageLayout>
+        <TabBar>
+          {tabConfigs.map((tabConfig) => (
+            <TabBarItem
+              id={tabConfig.id}
+              key={tabConfig.id}
+              title={tabConfig.title}
+              symbol={tabConfig.symbol}
+              onClick={onTabClicked}
+              isActive={sectionId === tabConfig.id}
+            />
+          ))}
+        </TabBar>
 
-      <Layout>{renderSection(sectionId)}</Layout>
+        <Content>{activeConfig?.section}</Content>
+      </PageLayout>
     </Panel>
   );
 };

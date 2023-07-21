@@ -2,14 +2,14 @@ import { createSlice } from "@reduxjs/toolkit";
 import { RootState } from "./store";
 
 export enum EditSectionIdEnum {
-  Captions,
-  Music,
-  Download,
+  Captions = "Captions",
+  Music = "Music",
+  Download = "Download",
 }
 
 export enum PageIdEnum {
-  UploadVideo,
-  EditVideo,
+  UploadVideo = "UploadVideo",
+  EditVideo = "EditVideo",
 }
 
 interface PageState {
@@ -29,7 +29,8 @@ const pageSlice = createSlice({
   initialState,
   reducers: {
     sessionCancelled: (state) => {
-      state.pageId = PageIdEnum.UploadVideo;
+      state.pageId = initialState.pageId;
+      state.editSection = initialState.editSection;
     },
     captionSectionComplete: (state) => {
       state.editSection = EditSectionIdEnum.Music;

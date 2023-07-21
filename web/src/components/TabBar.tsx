@@ -8,10 +8,9 @@ const Layout = styled.div`
 
 interface TabBarProps {
   children: ReactNode;
-  activeTabIndex: number;
 }
 
-const TabBar: FC<TabBarProps> = ({ children, activeTabIndex }) => {
+const TabBar: FC<TabBarProps> = ({ children }) => {
   return <Layout>{children}</Layout>;
 };
 

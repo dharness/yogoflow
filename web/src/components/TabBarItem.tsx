@@ -13,7 +13,7 @@ const StyledTabBarItem = styled.div<{ $isActive: boolean }>`
   display: flex;
   flex-direction: column;
   :hover {
-    background: #f3f3f3;
+    background: #f8f6fb;
   }
 `;
 
@@ -26,18 +26,22 @@ const Content = styled.div`
 `;
 
 interface TabBarItemProps {
+  id: string;
   title: string;
   symbol: string;
   isActive?: boolean;
+  onClick: (id: string) => void;
 }
 
 const TabBarItem: FC<TabBarItemProps> = ({
+  id,
   title,
   symbol,
+  onClick,
   isActive = false,
 }) => {
   return (
-    <StyledTabBarItem $isActive={isActive}>
+    <StyledTabBarItem $isActive={isActive} onClick={() => onClick(id)}>
       <TabBarIndicator isActive={isActive} />
       <Content>
         <Circle symbol={symbol} isActive={isActive} />

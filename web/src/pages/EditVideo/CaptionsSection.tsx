@@ -5,8 +5,11 @@ import { captionSectionComplete, selectVideoUrl } from "../../store/page";
 import styled from "styled-components/macro";
 import Button from "../../components/Button";
 import { useAppDispatch } from "../../store/store";
+import FormItem from "../../components/FormItem";
+import Form from "../../components/Form";
 
 const FONT_STYLE_OPTIONS = ["Roboto", "Arial"];
+const POSITION_OPTIONS = ["Top", "Bottom", "Left", "Right"];
 
 const Layout = styled.div`
   display: flex;
@@ -27,11 +30,6 @@ const Footer = styled.div`
   justify-content: end;
 `;
 
-const Form = styled.form`
-  flex: 1;
-  background: red;
-`;
-
 const CaptionsSection = () => {
   const dispatch = useAppDispatch();
   const videoUrl = useSelector(selectVideoUrl);
@@ -39,7 +37,14 @@ const CaptionsSection = () => {
     <Layout>
       <Content>
         <Form>
-          <Dropdown options={FONT_STYLE_OPTIONS} />
+          <FormItem
+            label="Position"
+            el={<Dropdown options={POSITION_OPTIONS} />}
+          />
+          <FormItem
+            label="Font-Style"
+            el={<Dropdown options={FONT_STYLE_OPTIONS} />}
+          />
         </Form>
         <VideoPreview videoUrl={videoUrl} />
       </Content>
