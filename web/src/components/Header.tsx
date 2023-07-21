@@ -2,7 +2,6 @@ import styled from "styled-components";
 import logoImg from "../assets/logo.png";
 
 const StyledHeader = styled.div`
-  /* height: 100px; */
   padding: 40px;
   display: flex;
   justify-content: center;
