@@ -1,8 +1,6 @@
 import styled from "styled-components";
 import PanelTitleBar from "./PanelTitleBar";
-import ActivePageBar from "./ActivePageBar";
-import NavButtons from "./NavButtons";
-import UploadVideo from "./pages/UploadVideo";
+import { FC, ReactNode } from "react";
 
 const PanelContent = styled.div`
   height: 100%;
@@ -21,16 +19,21 @@ const StyledPanel = styled.div`
   overflow: hidden;
 `;
 
-const Panel = () => {
+interface PanelProps {
+  children: ReactNode;
+  titleText: string;
+  onCloseClick: () => void;
+}
+
+const Panel: FC<PanelProps> = ({ titleText, onCloseClick, children }) => {
   return (
     <>
       <StyledPanel>
-        <PanelTitleBar></PanelTitleBar>
-        <ActivePageBar></ActivePageBar>
-        <PanelContent>
-          <UploadVideo />
-          {/* <NavButtons></NavButtons> */}
-        </PanelContent>
+        <PanelTitleBar
+          titleText={titleText}
+          onCloseClick={onCloseClick}
+        ></PanelTitleBar>
+        <PanelContent>{children}</PanelContent>
       </StyledPanel>
     </>
   );

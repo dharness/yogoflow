@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import xIconPath from "../assets/x-icon.svg";
+import { FC } from "react";
 
 const StyledPanelTitleBar = styled.div`
   height: 60px;
@@ -34,11 +35,16 @@ const CancelButton = styled.button`
   }
 `;
 
-const PanelTitleBar = () => {
+interface PanelTitleBarProps {
+  titleText: string;
+  onCloseClick: () => void;
+}
+
+const PanelTitleBar: FC<PanelTitleBarProps> = ({ titleText, onCloseClick }) => {
   return (
     <StyledPanelTitleBar>
-      <Title>Upload a video</Title>
-      <CancelButton>
+      <Title>{titleText}</Title>
+      <CancelButton onClick={onCloseClick}>
         <img src={xIconPath} />
       </CancelButton>
     </StyledPanelTitleBar>

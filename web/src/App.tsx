@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import Header from "./components/Header";
-import Panel from "./components/Panel";
+import MainPage from "./pages/MainPage";
 
 const AppLayout = styled.div`
   background: #261e2f;
@@ -16,7 +16,7 @@ function App() {
     <>
       <AppLayout>
         <Header></Header>
-        <Panel />
+        <MainPage />
       </AppLayout>
     </>
   );
