@@ -1,5 +1,5 @@
 import { FC, ReactNode } from "react";
-import styled from "styled-components";
+import styled from "styled-components/macro";
 
 const StyledButton = styled.button`
   background-color: #6706ce;
@@ -12,7 +12,6 @@ const StyledButton = styled.button`
   padding: 8px 20px 8px 20px;
   border-radius: 12px;
   cursor: pointer;
-  margin-top: 30px;
   &:hover {
     transform: scale(1.01);
   }
@@ -20,7 +19,7 @@ const StyledButton = styled.button`
 
 interface ButtonProps {
   children: ReactNode;
-  onClick: () => void;
+  onClick?: () => void;
 }
 
 const Button: FC<ButtonProps> = ({ onClick, children }) => {

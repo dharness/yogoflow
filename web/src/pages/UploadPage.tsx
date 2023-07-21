@@ -6,9 +6,8 @@ import { sessionCancelled, uploadComplete } from "../store/page";
 const UploadPage = () => {
   const dispatch = useAppDispatch();
   const onFileChanged = (file: File) => {
-    dispatch(uploadComplete());
-    console.log("File changed");
-    console.log(file);
+    const videoUrl = URL.createObjectURL(file);
+    dispatch(uploadComplete({ videoUrl }));
   };
 
   return (
@@ -17,8 +16,8 @@ const UploadPage = () => {
       onCloseClick={() => dispatch(sessionCancelled())}
     >
       <FileUpload
-        primaryText={"Drag & drop a video file to upload"}
-        secondaryText={"Your video will not be stored after processing."}
+        primaryText="Drag & drop a video file to upload"
+        secondaryText="Your video will not be stored after processing."
         onFileChanged={onFileChanged}
       />
     </Panel>

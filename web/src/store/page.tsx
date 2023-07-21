@@ -1,25 +1,27 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { RootState } from "./store";
 
-// export const loadPoseSequence = createAsyncThunk(
-//   "yoga-routine/load-pose-sequence",
-//   async (_payload, {}: any) => {
-//     const poseSequence = await routineApi.getPoseSequence(10);
-//     return poseSequence;
-//   }
-// );
+export enum EditSectionIdEnum {
+  Captions,
+  Music,
+  Download,
+}
 
-export enum PAGE_ID {
-  UPLOAD_VIDEO,
-  EDIT_VIDEO,
+export enum PageIdEnum {
+  UploadVideo,
+  EditVideo,
 }
 
 interface PageState {
-  pageId: PAGE_ID;
+  pageId: PageIdEnum;
+  videoUrl: string;
+  editSection: EditSectionIdEnum;
 }
 
 const initialState = {
-  pageId: PAGE_ID.UPLOAD_VIDEO,
+  pageId: PageIdEnum.UploadVideo,
+  videoUrl: "",
+  editSection: EditSectionIdEnum.Captions,
 } as PageState;
 
 const pageSlice = createSlice({
@@ -27,20 +29,30 @@ const pageSlice = createSlice({
   initialState,
   reducers: {
     sessionCancelled: (state) => {
-      state.pageId = PAGE_ID.UPLOAD_VIDEO;
+      state.pageId = PageIdEnum.UploadVideo;
     },
-    uploadComplete: (state) => {
-      state.pageId = PAGE_ID.EDIT_VIDEO;
+    captionSectionComplete: (state) => {
+      state.editSection = EditSectionIdEnum.Music;
+    },
+    musicSectionComplete: (state) => {
+      state.editSection = EditSectionIdEnum.Download;
+    },
+    uploadComplete: (state, action) => {
+      const { videoUrl } = action.payload;
+      state.pageId = PageIdEnum.EditVideo;
+      state.videoUrl = videoUrl;
     },
   },
-  // extraReducers: (builder) => {
-  //   builder.addCase(loadPoseSequence.fulfilled, (state, action) => {
-  //     state.poseSequence = action.payload;
-  //   });
-  // },
 });
 
-export const { uploadComplete, sessionCancelled } = pageSlice.actions;
+export const {
+  uploadComplete,
+  sessionCancelled,
+  captionSectionComplete,
+  musicSectionComplete,
+} = pageSlice.actions;
 export default pageSlice.reducer;
 
 export const selectPageId = (state: RootState) => state.page.pageId;
+export const selectVideoUrl = (state: RootState) => state.page.videoUrl;
+export const selectEditSectionId = (state: RootState) => state.page.editSection;

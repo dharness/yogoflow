@@ -1,15 +1,15 @@
 import { useSelector } from "react-redux";
-import { PAGE_ID, selectPageId } from "../store/page";
+import { PageIdEnum, selectPageId } from "../store/page";
 import UploadPage from "./UploadPage";
 import EditVideoPage from "./EditVideo/EditVideoPage";
 import ErrorPage from "./ErrorPage";
 
-const renderPage = (pageId: PAGE_ID) => {
+const renderPage = (pageId: PageIdEnum) => {
   switch (pageId) {
-    case PAGE_ID.UPLOAD_VIDEO:
+    case PageIdEnum.UploadVideo:
       return <UploadPage />;
 
-    case PAGE_ID.EDIT_VIDEO:
+    case PageIdEnum.EditVideo:
       return <EditVideoPage />;
 
     default:

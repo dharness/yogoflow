@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from "styled-components/macro";
 import uploadSymbolPath from "../assets/upload-symbol.svg";
 import { FC, useRef } from "react";
 import Button from "./Button";
@@ -7,6 +7,7 @@ const Texts = styled.div`
   font-family: "Inter", sans-serif;
   text-align: center;
   margin-top: 30px;
+  margin-bottom: 30px;
 `;
 
 const PrimaryText = styled.div`
@@ -22,6 +23,7 @@ const SecondaryText = styled.div`
 
 const UploadSymbol = styled.img`
   width: 150px;
+  min-width: 150px;
   margin-top: 80px;
 `;
 

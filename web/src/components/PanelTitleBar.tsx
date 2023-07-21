@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from "styled-components/macro";
 import xIconPath from "../assets/x-icon.svg";
 import { FC } from "react";
 
@@ -8,7 +8,7 @@ const StyledPanelTitleBar = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 25px;
+  padding: 35px;
   box-sizing: border-box;
 `;
 

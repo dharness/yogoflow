@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from "styled-components/macro";
 import logoImg from "../assets/logo.png";
 
 const StyledHeader = styled.div`
