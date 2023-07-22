@@ -1,10 +1,10 @@
 from dotenv import load_dotenv
+load_dotenv()
+
+from yogoflow.services.pose_model import pose_model
+from yogoflow.routes.video import VideoApi
 from flask import Flask
 from flask_restful import Api
-
-from yogoflow.routes.video import VideoApi
-from yogoflow.services.pose_model import pose_model
-load_dotenv()
 
 
 def create_app():

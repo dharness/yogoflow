@@ -29,13 +29,13 @@ class VideoApi(Resource):
     # Process the video
     video_file.save(in_file)
     urls = video_processor.extract_frames(
-      in_file, frames_dir, step_size=30)
+        in_file, frames_dir, step_size=30)
 
     # Predict the poses
     predictions = pose_model.predict_many(urls)
 
     # Quantize the poses
-    # print(predictions)
+    print(predictions)
 
     # Style the video
     # texts = [
