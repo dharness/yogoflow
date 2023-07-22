@@ -5,7 +5,7 @@ test_video_path = Path(__file__).parent / "test.mp4"
 out_dir = Path(__file__).parent / "out"
 
 
-def test_edit_user(client):
+def test_post_video(client):
   response = client.post("/api/video", data={
       "video_file": test_video_path.open('rb'),
   })
