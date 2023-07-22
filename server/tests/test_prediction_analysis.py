@@ -12,6 +12,8 @@ def _make_predictions(options):
     predictions += [{'value': value, 'confidence': 1.0}] * amount
   return predictions
 
+
+def _log_predictions(quantized_predictions):
   print('\n')
   for p in quantized_predictions:
     start = p['start']
@@ -112,3 +114,35 @@ def test_quantize_respect_streak_size():
   assert quantized_predictions[0]['value'] == 'standing'
   assert quantized_predictions[0]['start'] == 0
   assert quantized_predictions[0]['end'] == 8
+
+
+def test_quantize_really_noisy():
+  test_predictions = _make_predictions([
+      ['standing', 1],
+      ['sidebend', 10],
+      ['standing', 2],
+      ['sidebend', 3],
+      ['standing', 2],
+      ['squatting', 1],
+      ['standing', 1],
+      ['sidebend', 4],
+      ['standing', 1],
+      ['sidebend', 4],
+      ['standing', 1],
+  ])
+
+  quantized_predictions = quantize_predictions(test_predictions, streak_size=2)
+
+  assert len(quantized_predictions) == 6
+
+  assert quantized_predictions[0]['value'] == 'sidebend'
+  assert quantized_predictions[0]['start'] == 1
+  assert quantized_predictions[0]['end'] == 11
+
+  assert quantized_predictions[1]['value'] == 'standing'
+  assert quantized_predictions[1]['start'] == 11
+  assert quantized_predictions[1]['end'] == 13
+
+  assert quantized_predictions[2]['value'] == 'sidebend'
+  assert quantized_predictions[2]['start'] == 13
+  assert quantized_predictions[2]['end'] == 16

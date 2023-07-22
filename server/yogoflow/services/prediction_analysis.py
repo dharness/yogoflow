@@ -55,12 +55,12 @@ def quantize_predictions(predictions, streak_size=DEFAULT_STREAK_SIZE):
     if value == streak_2.value:
       streak_2.count += 1
       if streak_2.count >= streak_size:
-        if (streak_1.count > streak_size):
+        if (streak_1.count >= streak_size):
           save_streak(streak_1, streak_2.start)
         streak_1 = streak_2
         streak_2 = Streak()
         continue
 
-  if (streak_1.count > streak_size):
+  if (streak_1.count >= streak_size):
     save_streak(streak_1, len(predictions))
   return streaks

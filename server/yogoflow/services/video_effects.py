@@ -3,16 +3,19 @@ from moviepy.editor import VideoFileClip, ImageClip, CompositeVideoClip
 from yogoflow.config import YOGA_POSE_NAMES
 
 
-def add_text_overlay(file_path, text, outfile_path):
-  clip = VideoFileClip(file_path)
-  clips = [clip]
+class StyledVideo:
+  def __init__(self, file_path):
+    self.clip = VideoFileClip(file_path)
+    self.clips = [self.clip]
 
-  if text in YOGA_POSE_NAMES:
-    img_overlay_path = f"./yogoflow/assets/{text}.png"
-    img_clip = ImageClip(img_overlay_path)
+  def add_text_overlay(self, text, start, end):
+    if text in YOGA_POSE_NAMES:
+      img_overlay_path = f"./yogoflow/assets/{text}.png"
+      img_clip = ImageClip(img_overlay_path)
 
-    img_clip = img_clip.set_pos('center').set_duration(clip.duration)
-    clips.append(img_clip)
+      img_clip = img_clip.set_pos('center').set_start(start).set_end(end)
+      self.clips.append(img_clip)
 
-  comp = CompositeVideoClip(clips)
-  comp.write_videofile(outfile_path, fps=clip.fps)
+  def write(self, outfile_path):
+    comp = CompositeVideoClip(self.clips)
+    comp.write_videofile(outfile_path, fps=self.clip.fps)
