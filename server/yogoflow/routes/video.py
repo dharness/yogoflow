@@ -5,7 +5,7 @@ from tempfile import TemporaryDirectory, NamedTemporaryFile
 from flask import after_this_request, request, send_file
 from flask_restful import Resource
 from yogoflow.services.pose_model import pose_model
-from yogoflow.services.vide_processor import video_processor
+from yogoflow.services.video_processor import video_processor
 from yogoflow.services.video_effects import add_text_overlay
 
 
@@ -16,10 +16,12 @@ class VideoApi(Resource):
     if (video_file is None):
       return {'error': 'missing video_file'}, 400
 
+    # Create temp files
     in_file = NamedTemporaryFile(suffix=".mp4", delete=False).name
     out_file = NamedTemporaryFile(suffix=".mp4", delete=False).name
     frames_dir = TemporaryDirectory().name
 
+    # Cleanup temp files
     @after_this_request
     def cleanup(response):
       os.remove(in_file)
@@ -28,11 +30,11 @@ class VideoApi(Resource):
 
     # Process the video
     video_file.save(in_file)
-    urls = video_processor.extract_frames(
+    file_paths = video_processor.extract_frames(
         in_file, frames_dir, step_size=30)
 
     # Predict the poses
-    predictions = pose_model.predict_many(urls)
+    predictions = pose_model.predict_many(file_paths)
 
     # Quantize the poses
     print(predictions)

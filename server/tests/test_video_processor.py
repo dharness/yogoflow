@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from yogoflow.services.vide_processor import video_processor
+from yogoflow.services.video_processor import video_processor
 
 
 test_video_path = str(Path(__file__).parent / "test.mp4")

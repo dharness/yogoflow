@@ -28,19 +28,24 @@ class PoseModel:
     top = api_response.get('top')
     confidence = api_response.get('confidence')
     return {
-        'pose': top,
+        'value': top,
         'confidence': confidence
     }
 
   def prdict_api(self, image_url):
-    image_base64 = get_base64(image_url)
-    params = {"api_key": ROBOFLOW_API_KEY}
-    headers = {"Content-Type": "application/x-www-form-urlencoded"}
-    response = self.session.post(
-        ROBOFLOW_URL, params=params, data=image_base64, headers=headers)
+    try:
+      image_base64 = get_base64(image_url)
+      params = {"api_key": ROBOFLOW_API_KEY}
+      headers = {"Content-Type": "application/x-www-form-urlencoded"}
+      response = self.session.post(
+          ROBOFLOW_URL, params=params, data=image_base64, headers=headers)
 
-    result = self._format_response(response.json())
-    return result
+      result = self._format_response(response.json())
+      return result
+
+    except Exception as e:
+      print(e)
+      return {'value': DEFAULT_POSE, 'confidence': 0}
 
   def predict_many(self, image_urls):
     predictions = []
