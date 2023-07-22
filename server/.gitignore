@@ -1,0 +1,12 @@
+# Python
+.venv
+__pycache__/
+frames
+.venv/
+*.pyc
+instance/
+.pytest_cache/
+.coverage
+htmlcov/
+*.egg-info/
+/tests/out

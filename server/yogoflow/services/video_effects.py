@@ -1,6 +1,6 @@
 import tempfile
 from moviepy.editor import VideoFileClip, ImageClip, CompositeVideoClip
-from config import YOGA_POSE_NAMES
+from yogoflow.config import YOGA_POSE_NAMES
 
 
 def add_text_overlay(file_path, text, outfile_path):
@@ -8,7 +8,7 @@ def add_text_overlay(file_path, text, outfile_path):
   clips = [clip]
 
   if text in YOGA_POSE_NAMES:
-    img_overlay_path = f"./assets/{text}.png"
+    img_overlay_path = f"./yogoflow/assets/{text}.png"
     img_clip = ImageClip(img_overlay_path)
 
     img_clip = img_clip.set_pos('center').set_duration(clip.duration)

@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { RootState } from "./store";
 
-export enum EditSectionIdEnum {
+export enum TabIdEnum {
   Captions = "Captions",
   Music = "Music",
   Download = "Download",
@@ -15,28 +15,31 @@ export enum PageIdEnum {
 interface PageState {
   pageId: PageIdEnum;
   videoUrl: string;
-  editSection: EditSectionIdEnum;
+  currentTabId: TabIdEnum;
 }
 
 const initialState = {
   pageId: PageIdEnum.UploadVideo,
   videoUrl: "",
-  editSection: EditSectionIdEnum.Captions,
+  currentTabId: TabIdEnum.Captions,
 } as PageState;
 
 const pageSlice = createSlice({
   name: "page",
   initialState,
   reducers: {
+    tabSelected: (state, action) => {
+      state.currentTabId = action.payload.tabId;
+    },
     sessionCancelled: (state) => {
       state.pageId = initialState.pageId;
-      state.editSection = initialState.editSection;
+      state.currentTabId = initialState.currentTabId;
     },
     captionSectionComplete: (state) => {
-      state.editSection = EditSectionIdEnum.Music;
+      state.currentTabId = TabIdEnum.Music;
     },
     musicSectionComplete: (state) => {
-      state.editSection = EditSectionIdEnum.Download;
+      state.currentTabId = TabIdEnum.Download;
     },
     uploadComplete: (state, action) => {
       const { videoUrl } = action.payload;
@@ -51,9 +54,10 @@ export const {
   sessionCancelled,
   captionSectionComplete,
   musicSectionComplete,
+  tabSelected,
 } = pageSlice.actions;
 export default pageSlice.reducer;
 
 export const selectPageId = (state: RootState) => state.page.pageId;
 export const selectVideoUrl = (state: RootState) => state.page.videoUrl;
-export const selectEditSectionId = (state: RootState) => state.page.editSection;
+export const selectCurrentTabId = (state: RootState) => state.page.currentTabId;

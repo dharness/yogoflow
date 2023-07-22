@@ -6,7 +6,7 @@ import cv2
 import os
 
 
-from config import ROBOFLOW_API_KEY, ROBOFLOW_MODEL_NAME, ROBOFLOW_MODEL_VERSION
+from yogoflow.config import ROBOFLOW_API_KEY, ROBOFLOW_MODEL_NAME, ROBOFLOW_MODEL_VERSION
 DEFAULT_POSE = 'no-pose'
 
 

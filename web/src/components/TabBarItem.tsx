@@ -26,22 +26,20 @@ const Content = styled.div`
 `;
 
 interface TabBarItemProps {
-  id: string;
   title: string;
   symbol: string;
   isActive?: boolean;
-  onClick: (id: string) => void;
+  onClick: () => void;
 }
 
 const TabBarItem: FC<TabBarItemProps> = ({
-  id,
   title,
   symbol,
   onClick,
   isActive = false,
 }) => {
   return (
-    <StyledTabBarItem $isActive={isActive} onClick={() => onClick(id)}>
+    <StyledTabBarItem $isActive={isActive} onClick={onClick}>
       <TabBarIndicator isActive={isActive} />
       <Content>
         <Circle symbol={symbol} isActive={isActive} />

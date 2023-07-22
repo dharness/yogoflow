@@ -1,8 +1,8 @@
 import tempfile
 from flask import request, send_file
 from flask_restful import Resource
-from services.pose_service import PoseService
-from services.video_effects import add_text_overlay
+from yogoflow.services.pose_service import PoseService
+from yogoflow.services.video_effects import add_text_overlay
 
 
 class VideoApi(Resource):

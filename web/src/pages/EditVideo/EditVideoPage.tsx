@@ -1,9 +1,10 @@
 import { useSelector } from "react-redux";
 import Panel from "../../components/Panel";
 import {
-  EditSectionIdEnum,
-  selectEditSectionId,
+  TabIdEnum,
+  selectCurrentTabId,
   sessionCancelled,
+  tabSelected,
 } from "../../store/page";
 import { useAppDispatch } from "../../store/store";
 import styled from "styled-components/macro";
@@ -19,19 +20,19 @@ const tabConfigs = [
   {
     title: "Add Captions",
     section: <CaptionsSection />,
-    id: EditSectionIdEnum.Captions,
+    id: TabIdEnum.Captions,
     symbol: "1",
   },
   {
     title: "Add Music",
     section: <MusicSection />,
-    id: EditSectionIdEnum.Music,
+    id: TabIdEnum.Music,
     symbol: "2",
   },
   {
     title: "Download",
     section: <DownloadSection />,
-    id: EditSectionIdEnum.Download,
+    id: TabIdEnum.Download,
     symbol: "3",
   },
 ];
@@ -58,11 +59,11 @@ const PageLayout = styled.div`
 
 const EditVideoPage = () => {
   const dispatch = useAppDispatch();
-  const sectionId = useSelector(selectEditSectionId);
+  const sectionId = useSelector(selectCurrentTabId);
   const activeConfig = tabConfigs.find(({ id }) => id === sectionId);
 
-  const onTabClicked = () => {
-    console.log("tab cliekce");
+  const onTabClicked = (tabId: TabIdEnum) => {
+    dispatch(tabSelected({ tabId }));
   };
 
   return (
@@ -74,11 +75,10 @@ const EditVideoPage = () => {
         <TabBar>
           {tabConfigs.map((tabConfig) => (
             <TabBarItem
-              id={tabConfig.id}
               key={tabConfig.id}
               title={tabConfig.title}
               symbol={tabConfig.symbol}
-              onClick={onTabClicked}
+              onClick={() => onTabClicked(tabConfig.id)}
               isActive={sectionId === tabConfig.id}
             />
           ))}

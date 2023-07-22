@@ -1,7 +1,8 @@
 import styled from "styled-components/macro";
 import uploadSymbolPath from "../assets/upload-symbol.svg";
-import { FC, useRef } from "react";
+import { FC, useCallback, useRef } from "react";
 import Button from "./Button";
+import { useDropzone } from "react-dropzone";
 
 const Texts = styled.div`
   font-family: "Inter", sans-serif;
@@ -16,8 +17,8 @@ const PrimaryText = styled.div`
 `;
 
 const SecondaryText = styled.div`
-  color: #c6c5c8;
-  font-size: 12px;
+  color: #848385;
+  font-size: 13px;
   margin-top: 10px;
 `;
 
@@ -33,6 +34,16 @@ const Layout = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  position: relative;
+`;
+
+const DragDropOverlay = styled.div`
+  position: absolute;
+  bottom: 7%;
+  width: 90%;
+  height: 90%;
+  border-radius: 20px;
+  border: 3px dotted #ccbcdc;
 `;
 
 interface FileUploadProps {
@@ -52,14 +63,33 @@ const FileUpload: FC<FileUploadProps> = ({
     inputRef.current?.click();
   };
 
-  const getFileFromInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (!e.currentTarget.files) return;
-    const files = Array.from(e.currentTarget.files);
-    onFileChanged(files[0]);
-  };
+  const getFileFromInput = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      if (!e.currentTarget.files) return;
+      const files = Array.from(e.currentTarget.files);
+      onFileChanged(files[0]);
+    },
+    [onFileChanged]
+  );
+
+  const onDrop = useCallback(
+    (files: File[]) => {
+      if (!files.length) return;
+      onFileChanged(files[0]);
+    },
+    [onFileChanged]
+  );
+
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({
+    onDrop,
+    accept: {
+      "video/mp4": [".mp4"],
+    },
+  });
 
   return (
-    <Layout>
+    <Layout {...getRootProps()} onClick={null}>
+      {isDragActive && <DragDropOverlay />}
       <UploadSymbol src={uploadSymbolPath} />
       <Texts>
         {primaryText && <PrimaryText>{primaryText}</PrimaryText>}
@@ -67,6 +97,8 @@ const FileUpload: FC<FileUploadProps> = ({
       </Texts>
       <Button onClick={onBrowseClick}>Browse Files</Button>
       <input
+        {...getInputProps()}
+        accept="video/mp4"
         type="file"
         onChange={getFileFromInput}
         ref={inputRef}
