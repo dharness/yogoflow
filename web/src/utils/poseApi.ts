@@ -1,12 +1,17 @@
 import axios, { AxiosRequestConfig } from "axios";
 import { CaptionPositionEnum } from "../store/pageSlice";
+import { makeMockProgress } from "./mockProgress";
 
 const BASE_URL = import.meta.env.VITE_APII_URL;
 
 export async function generateVideo(
   inputVideo: File,
-  captionPosition: CaptionPositionEnum
+  captionPosition: CaptionPositionEnum,
+  onProgress: (progress: number) => void
 ) {
+  const progressSeconds = 25;
+  const mockProgress = makeMockProgress(progressSeconds, onProgress);
+
   const formdata = new FormData();
   formdata.append(
     "video_file",
@@ -26,5 +31,6 @@ export async function generateVideo(
   };
 
   const response = await axios(config);
+  await mockProgress.complete();
   return response.data;
 }

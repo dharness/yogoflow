@@ -7,9 +7,13 @@ import Button, { ButtonVariantsEnum } from "../../components/Button";
 import { useAppDispatch } from "../../store/store";
 import { useRef } from "react";
 import {
+  RequestStatusEnum,
   generateTriggered,
+  selectGenerateStatus,
   selectGeneratedVideoUrl,
+  selectLoadingProgess,
 } from "../../store/generateVideoSlice";
+import LoadingWheel from "../../components/LoadingWheel";
 
 const Layout = styled.div`
   display: flex;
@@ -52,7 +56,10 @@ const GenerateSection = () => {
   const dispatch = useAppDispatch();
   const downloadLink = useRef<HTMLAnchorElement>(null);
   const videoUrl = useSelector(selectGeneratedVideoUrl);
-  const loadingPercent = 0.1;
+  const status = useSelector(selectGenerateStatus);
+  const isLoading = status === RequestStatusEnum.Pending;
+  const loadingPercent = useSelector(selectLoadingProgess);
+  console.log(loadingPercent);
 
   const renderDownloadButtons = () => (
     <>
@@ -72,8 +79,10 @@ const GenerateSection = () => {
     </>
   );
 
-  const renderGenerateButtons = () => (
-    <Button onClick={() => dispatch(generateTriggered())}>Generate</Button>
+  const renderGenerateButtons = (disabled: boolean) => (
+    <Button onClick={() => dispatch(generateTriggered())} disabled={disabled}>
+      Generate
+    </Button>
   );
 
   const renderGeneratePrompt = () => {
@@ -90,11 +99,17 @@ const GenerateSection = () => {
     );
   };
 
+  const renderContent = () => {
+    if (isLoading) return <LoadingWheel percent={loadingPercent} />;
+    if (videoUrl) return <VideoPreview videoUrl={videoUrl} />;
+    return renderGeneratePrompt();
+  };
+
   return (
     <Layout>
-      {videoUrl ? <VideoPreview videoUrl={videoUrl} /> : renderGeneratePrompt()}
+      {renderContent()}
       <Footer>
-        {videoUrl ? renderDownloadButtons() : renderGenerateButtons()}
+        {videoUrl ? renderDownloadButtons() : renderGenerateButtons(isLoading)}
       </Footer>
     </Layout>
   );

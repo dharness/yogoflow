@@ -10,12 +10,16 @@ import { generateVideo } from "../utils/poseApi";
 
 export const generateTriggered = createAsyncThunk(
   "generate-triggered",
-  async (arg, { getState }) => {
+  async (arg, { getState, dispatch }) => {
     const state = getState() as RootState;
     const videoUrl = selectVideoUrl(state);
     const captionPosition = selectCaptionPosition(state);
     const videoFile = await blobUrlToFile(videoUrl);
-    const data = await generateVideo(videoFile, captionPosition);
+
+    const data = await generateVideo(videoFile, captionPosition, (progress) => {
+      dispatch(loadingProgressChanged(progress.toFixed(1)));
+    });
+
     const blob = new Blob([data], { type: "video/mp4" });
     const url = URL.createObjectURL(blob);
 
@@ -33,17 +37,23 @@ export enum RequestStatusEnum {
 interface GenerateVideoState {
   url: string;
   status: RequestStatusEnum;
+  loadingProgress: number;
 }
 
 const initialState: GenerateVideoState = {
   url: "",
   status: RequestStatusEnum.None,
+  loadingProgress: 0,
 };
 
 const generateVideoSlice = createSlice({
   name: "generate-video",
   initialState,
-  reducers: {},
+  reducers: {
+    loadingProgressChanged: (state, action) => {
+      state.loadingProgress = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(sessionCancelled.fulfilled, (state, action) => {
@@ -62,7 +72,12 @@ const generateVideoSlice = createSlice({
   },
 });
 
+export const { loadingProgressChanged } = generateVideoSlice.actions;
 export default generateVideoSlice.reducer;
 
 export const selectGeneratedVideoUrl = (state: RootState) =>
   state.generateVideo.url;
+export const selectGenerateStatus = (state: RootState) =>
+  state.generateVideo.status;
+export const selectLoadingProgess = (state: RootState) =>
+  state.generateVideo.loadingProgress;
