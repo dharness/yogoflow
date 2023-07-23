@@ -8,6 +8,7 @@ export enum CaptionPositionEnum {
 }
 
 export enum TabIdEnum {
+  Upload = "Upload",
   Captions = "Captions",
   Music = "Music",
   Download = "Download",
@@ -40,7 +41,7 @@ interface PageState {
 const initialState: PageState = {
   pageId: PageIdEnum.UploadVideo,
   videoUrl: "",
-  currentTabId: TabIdEnum.Captions,
+  currentTabId: TabIdEnum.Upload,
   captionPosition: CaptionPositionEnum.Left,
 };
 

@@ -1,6 +1,6 @@
 import styled from "styled-components/macro";
 import Header from "./components/Header";
-import MainPage from "./pages/MainPage";
+import MainPage2 from "./pages/MainPage";
 
 const AppLayout = styled.div`
   background: #261e2f;
@@ -13,12 +13,10 @@ const AppLayout = styled.div`
 
 function App() {
   return (
-    <>
-      <AppLayout>
-        <Header></Header>
-        <MainPage />
-      </AppLayout>
-    </>
+    <AppLayout>
+      <Header></Header>
+      <MainPage2 />
+    </AppLayout>
   );
 }
 
