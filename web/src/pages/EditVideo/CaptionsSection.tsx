@@ -1,15 +1,18 @@
 import { useSelector } from "react-redux";
 import Dropdown from "../../components/Dropdown";
 import VideoPreview from "../../components/VideoPreview";
-import { captionSectionComplete, selectVideoUrl } from "../../store/page";
+import {
+  CaptionPositionEnum,
+  captionPositionChanged,
+  captionSectionComplete,
+  selectCaptionPosition,
+  selectVideoUrl,
+} from "../../store/pageSlice";
 import styled from "styled-components/macro";
 import Button from "../../components/Button";
 import { useAppDispatch } from "../../store/store";
 import FormItem from "../../components/FormItem";
 import Form from "../../components/Form";
-
-const FONT_STYLE_OPTIONS = ["Roboto", "Arial"];
-const POSITION_OPTIONS = ["Top", "Bottom", "Left", "Right"];
 
 const Layout = styled.div`
   display: flex;
@@ -33,17 +36,25 @@ const Footer = styled.div`
 const CaptionsSection = () => {
   const dispatch = useAppDispatch();
   const videoUrl = useSelector(selectVideoUrl);
+  const selectedPosition = useSelector(selectCaptionPosition);
+
+  const onPositionSelected = (nextCaptionPosition: string) => {
+    dispatch(captionPositionChanged(nextCaptionPosition));
+  };
+
   return (
     <Layout>
       <Content>
         <Form>
           <FormItem
             label="Position"
-            el={<Dropdown options={POSITION_OPTIONS} />}
-          />
-          <FormItem
-            label="Font-Style"
-            el={<Dropdown options={FONT_STYLE_OPTIONS} />}
+            el={
+              <Dropdown
+                selected={selectedPosition}
+                options={Object.values(CaptionPositionEnum)}
+                onChange={onPositionSelected}
+              />
+            }
           />
         </Form>
         <VideoPreview videoUrl={videoUrl} />

@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { PageIdEnum, selectPageId } from "../store/page";
+import { PageIdEnum, selectPageId } from "../store/pageSlice";
 import UploadPage from "./UploadPage";
 import EditVideoPage from "./EditVideo/EditVideoPage";
 import ErrorPage from "./ErrorPage";

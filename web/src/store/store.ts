@@ -1,10 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { useDispatch } from "react-redux";
-import pageReducer from "./page";
+import pageReducer from "./pageSlice";
+import generateVideoReducer from "./generateVideoSlice";
 
 export const store = configureStore({
   reducer: {
     page: pageReducer,
+    generateVideo: generateVideoReducer,
   },
 });
 

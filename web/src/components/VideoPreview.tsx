@@ -32,7 +32,7 @@ const VideoPreview: FC<VideoPreviewProps> = ({ videoUrl }) => {
   return (
     <VideoWrapper>
       <TextOverlay />
-      <StyledVideo controls>
+      <StyledVideo controls key={videoUrl}>
         <source src={videoUrl} type="video/mp4" />
       </StyledVideo>
     </VideoWrapper>

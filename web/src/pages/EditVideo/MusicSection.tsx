@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
 import Dropdown from "../../components/Dropdown";
 import VideoPreview from "../../components/VideoPreview";
-import { musicSectionComplete, selectVideoUrl } from "../../store/page";
+import { musicSectionComplete, selectVideoUrl } from "../../store/pageSlice";
 import styled from "styled-components/macro";
 import Button from "../../components/Button";
 import { useAppDispatch } from "../../store/store";

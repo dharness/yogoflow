@@ -1,9 +1,9 @@
 import os
 import shutil
-import tempfile
 from tempfile import TemporaryDirectory, NamedTemporaryFile
 from flask import after_this_request, request, send_file
 from flask_restful import Resource
+from yogoflow.services.encoding import sha256_hash_file
 from yogoflow.services.pose_model import pose_model
 from yogoflow.services.prediction_analysis import quantize_predictions
 from yogoflow.services.video_processor import video_processor
@@ -17,10 +17,13 @@ def chunk_to_seconds(chunk_number):
   return chunk_number * VIDEO_CHUNK_SIZE / FPS
 
 
+prediction_cache = {}
+
+
 class VideoApi(Resource):
   def post(self):
-    print("POST /api/video")
     video_file = request.files.get('video_file')
+    caption_position = request.form.get('caption_position')
     if (video_file is None):
       return {'error': 'missing video_file'}, 400
 
@@ -42,10 +45,12 @@ class VideoApi(Resource):
         in_file, frames_dir, step_size=VIDEO_CHUNK_SIZE)
 
     # Predict the poses
-    predictions = pose_model.predict_many(file_paths)
+    file_hash = sha256_hash_file(in_file)
+    predictions = prediction_cache.get(file_hash)
+    if (predictions is None):
+      predictions = pose_model.predict_many(file_paths)
+      prediction_cache[file_hash] = predictions
 
-    for p in predictions:
-      print(p['value'])
     # Quantize the poses
     video_sections = quantize_predictions(predictions)
 
@@ -60,7 +65,7 @@ class VideoApi(Resource):
         continue
 
       styled_video.add_text_overlay(
-          text, chunk_to_seconds(start), chunk_to_seconds(end))
+          text, chunk_to_seconds(start), chunk_to_seconds(end), caption_position)
 
     # Render the video, and return it to the client
     styled_video.write(out_file)

@@ -5,12 +5,12 @@ import {
   selectCurrentTabId,
   sessionCancelled,
   tabSelected,
-} from "../../store/page";
+} from "../../store/pageSlice";
 import { useAppDispatch } from "../../store/store";
 import styled from "styled-components/macro";
 import CaptionsSection from "./CaptionsSection";
 import MusicSection from "./MusicSection";
-import DownloadSection from "./DownloadSection";
+import GenerateSection from "./GenerateSection";
 import TabBar from "../../components/TabBar";
 import TabBarItem from "../../components/TabBarItem";
 
@@ -30,8 +30,8 @@ const tabConfigs = [
     symbol: "2",
   },
   {
-    title: "Download",
-    section: <DownloadSection />,
+    title: "Generate",
+    section: <GenerateSection />,
     id: TabIdEnum.Download,
     symbol: "3",
   },

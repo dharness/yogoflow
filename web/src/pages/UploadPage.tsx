@@ -1,7 +1,7 @@
 import Panel from "../components/Panel";
 import FileUpload from "../components/FileUpload";
 import { useAppDispatch } from "../store/store";
-import { sessionCancelled, uploadComplete } from "../store/page";
+import { sessionCancelled, uploadComplete } from "../store/pageSlice";
 
 const UploadPage = () => {
   const dispatch = useAppDispatch();
