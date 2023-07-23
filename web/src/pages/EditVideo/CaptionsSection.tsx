@@ -57,7 +57,7 @@ const CaptionsSection = () => {
             }
           />
         </Form>
-        <VideoPreview videoUrl={videoUrl} />
+        <VideoPreview videoUrl={videoUrl} overlayPosition={selectedPosition} />
       </Content>
       <Footer>
         <Button onClick={() => dispatch(captionSectionComplete())}>
