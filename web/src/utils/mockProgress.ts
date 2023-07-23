@@ -9,9 +9,9 @@ export const makeMockProgress = (
   onTick: (progress: number) => void
 ) => {
   const precision = 10;
-  let resolve: any;
+  let resolve: () => void;
   let increment = 1 / precision;
-  const promise = new Promise((r) => (resolve = r));
+  const promise = new Promise<void>((r) => (resolve = r));
   const msPerSecond = 1000;
   const maxValue = 100;
   const intervalTime = (seconds * msPerSecond) / maxValue / precision;
@@ -21,15 +21,15 @@ export const makeMockProgress = (
     progress += increment;
     onTick(progress);
     if (progress >= maxValue) {
-      resolve && resolve();
       clearInterval(intervalId);
+      resolve && resolve();
     }
   }, intervalTime);
 
   return {
     cancel: () => clearInterval(intervalId),
     complete: async () => {
-      increment = 1;
+      increment = 5 / precision;
       return promise;
     },
   };

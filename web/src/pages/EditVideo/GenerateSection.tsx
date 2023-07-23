@@ -59,7 +59,6 @@ const GenerateSection = () => {
   const status = useSelector(selectGenerateStatus);
   const isLoading = status === RequestStatusEnum.Pending;
   const loadingPercent = useSelector(selectLoadingProgess);
-  console.log(loadingPercent);
 
   const renderDownloadButtons = () => (
     <>

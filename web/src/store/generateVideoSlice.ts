@@ -17,7 +17,7 @@ export const generateTriggered = createAsyncThunk(
     const videoFile = await blobUrlToFile(videoUrl);
 
     const data = await generateVideo(videoFile, captionPosition, (progress) => {
-      dispatch(loadingProgressChanged(progress.toFixed(1)));
+      dispatch(loadingProgressChanged(progress.toFixed(0)));
     });
 
     const blob = new Blob([data], { type: "video/mp4" });
@@ -58,6 +58,7 @@ const generateVideoSlice = createSlice({
     builder
       .addCase(sessionCancelled.fulfilled, (state, action) => {
         state.url = "";
+        state.loadingProgress = 0;
       })
       .addCase(generateTriggered.pending, (state, action) => {
         state.status = RequestStatusEnum.Pending;

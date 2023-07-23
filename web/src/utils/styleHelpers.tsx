@@ -13,4 +13,5 @@ export const palette = {
 
 export const fonts = {
   dongle: "Dongle, sans-serif",
+  inter: "Inter, sans-serif",
 };
