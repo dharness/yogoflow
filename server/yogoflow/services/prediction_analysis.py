@@ -23,6 +23,8 @@ def quantize_predictions(predictions, streak_size=DEFAULT_STREAK_SIZE):
   if len(predictions) == 0:
     return []
 
+  # Maintain 2 streaks, streak_1 is the primary streak, streak_2 is the "next streak"
+  # If streak_2 is long enough, then we can promote it to streak_1
   streak_1 = Streak()
   streak_2 = Streak()
   streaks = []

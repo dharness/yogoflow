@@ -11,13 +11,11 @@ from yogoflow.services.video_effects import StyledVideo
 
 VIDEO_CHUNK_SIZE = 30
 FPS = 30
+prediction_cache = {}
 
 
 def chunk_to_seconds(chunk_number):
   return chunk_number * VIDEO_CHUNK_SIZE / FPS
-
-
-prediction_cache = {}
 
 
 class VideoApi(Resource):

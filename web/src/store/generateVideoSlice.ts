@@ -69,7 +69,9 @@ const generateVideoSlice = createSlice({
         state.status = RequestStatusEnum.Success;
       })
       .addCase(generateTriggered.rejected, (state, action) => {
+        console.log(action.error);
         state.status = RequestStatusEnum.Failure;
+        state.loadingProgress = 0;
       });
   },
 });

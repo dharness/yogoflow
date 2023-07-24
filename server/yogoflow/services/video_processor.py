@@ -3,6 +3,7 @@ import cv2
 
 
 class VideoProcessor:
+  # Extract frames from a video
   def extract_frames(self, video_path, out_dir, step_size=1):
     urls = []
     print(f"Extracting frames from {video_path} to {out_dir}")
