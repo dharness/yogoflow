@@ -69,8 +69,8 @@ const LoadingWheel: FC<LoadingWheelProps> = ({ percent }) => {
               y2="200"
               gradientUnits="userSpaceOnUse"
             >
-              <stop stopColor="#6706CE" />
-              <stop offset="1" stopColor="#DB76FF" />
+              <stop stopColor={palette.purples.shade70} />
+              <stop offset="1" stopColor={palette.purples.shade50} />
             </linearGradient>
           </defs>
         </LinearGradientSvg>

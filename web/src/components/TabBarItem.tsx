@@ -2,18 +2,28 @@ import { FC } from "react";
 import styled from "styled-components/macro";
 import Circle from "./Circle";
 import TabBarIndicator from "./TabBarIndicator";
+import { fonts, palette } from "../utils/styleHelpers";
 
-const StyledTabBarItem = styled.div<{ $isActive: boolean }>`
+const getFontColor = (isActive: boolean, enabled: boolean) => {
+  if (isActive) {
+    return palette.greys.black;
+  }
+  return enabled ? palette.greys.black : palette.greys.shade40;
+};
+
+const StyledTabBarItem = styled.div<{ $isActive: boolean; $enabled: boolean }>`
   height: 50px;
   width: 100%;
-  font-family: "Inter", sans-serif;
+  font-family: ${fonts.inter};
   font-weight: 900;
   font-size: 15px;
-  cursor: pointer;
   display: flex;
+
+  color: ${({ $isActive, $enabled }) => getFontColor($isActive, $enabled)};
   flex-direction: column;
+  cursor: ${({ $enabled }) => ($enabled ? "pointer" : "default")};
   :hover {
-    background: #f8f6fb;
+    background: ${({ $enabled }) => ($enabled ? palette.greys.shade10 : "")};
   }
 `;
 
@@ -26,6 +36,7 @@ const Content = styled.div`
 `;
 
 interface TabBarItemProps {
+  enabled?: boolean;
   title: string;
   symbol: string;
   isActive?: boolean;
@@ -33,13 +44,18 @@ interface TabBarItemProps {
 }
 
 const TabBarItem: FC<TabBarItemProps> = ({
+  enabled = false,
   title,
   symbol,
   onClick,
   isActive = false,
 }) => {
   return (
-    <StyledTabBarItem $isActive={isActive} onClick={onClick}>
+    <StyledTabBarItem
+      $enabled={enabled}
+      $isActive={isActive}
+      onClick={() => enabled && onClick()}
+    >
       <TabBarIndicator isActive={isActive} />
       <Content>
         <Circle symbol={symbol} isActive={isActive} />

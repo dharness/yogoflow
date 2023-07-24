@@ -1,9 +1,10 @@
 import styled from "styled-components/macro";
 import Header from "./components/Header";
-import MainPage2 from "./pages/MainPage";
+import MainPage from "./pages/MainPage";
+import { palette } from "./utils/styleHelpers";
 
 const AppLayout = styled.div`
-  background: #261e2f;
+  background: ${palette.purples.shade90};
   height: 100vh;
   width: 100%;
   display: flex;
@@ -15,7 +16,7 @@ function App() {
   return (
     <AppLayout>
       <Header></Header>
-      <MainPage2 />
+      <MainPage />
     </AppLayout>
   );
 }

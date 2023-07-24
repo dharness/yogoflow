@@ -59,6 +59,7 @@ const generateVideoSlice = createSlice({
       .addCase(sessionCancelled.fulfilled, (state, action) => {
         state.url = "";
         state.loadingProgress = 0;
+        state.status = RequestStatusEnum.None;
       })
       .addCase(generateTriggered.pending, (state, action) => {
         state.status = RequestStatusEnum.Pending;

@@ -19,22 +19,3 @@ cd server
 pip install -r requirements.txt
 python app.py
 ```
-
-### Deployment:
-
-You will need a vercel account and the vercel CLI:
-https://vercel.com/docs/cli
-
-Note: Currently only the frontend can be deployed.
-
-To deploy a preview:
-
-```
-vercel
-```
-
-To deploy to production:
-
-```
-vercel --prod
-```

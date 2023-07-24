@@ -1,10 +1,12 @@
 import { FC } from "react";
 import styled from "styled-components";
 import { CaptionPositionEnum } from "../store/pageSlice";
+import textOverlayExample from "../assets/text-overlay-example.svg";
 
 const VideoWrapper = styled.div`
   max-width: 350px;
-  max-height: 320px;
+  max-height: 260px;
+
   position: relative;
   border-radius: 12px;
   overflow: clip;
@@ -13,18 +15,23 @@ const VideoWrapper = styled.div`
 const StyledVideo = styled.video`
   max-width: 100%;
   max-height: 100%;
+  height: 100%;
+  width: 100%;
   border-radius: 12px;
+  ::-webkit-media-controls-panel {
+    background-image: none !important;
+    filter: brightness(0.4);
+  }
 `;
 
-const TextOverlay = styled.div<{ $position: CaptionPositionEnum }>`
-  height: 30px;
-  width: 110px;
+const TextOverlay = styled.img<{ $position: CaptionPositionEnum }>`
+  height: 34px;
   position: absolute;
-  background-color: #e9e4ef;
   top: 10px;
   right: ${({ $position }) =>
-    $position === CaptionPositionEnum.Right ? "0px" : "auto"};
-  border-radius: 0 20px 20px 0;
+    $position === CaptionPositionEnum.Right ? "10px" : "auto"};
+  left: ${({ $position }) =>
+    $position === CaptionPositionEnum.Left ? "10px" : "auto"};
 `;
 
 interface VideoPreviewProps {
@@ -35,8 +42,10 @@ interface VideoPreviewProps {
 const VideoPreview: FC<VideoPreviewProps> = ({ videoUrl, overlayPosition }) => {
   return (
     <VideoWrapper>
-      {overlayPosition && <TextOverlay $position={overlayPosition} />}
-      <StyledVideo controls key={videoUrl}>
+      {overlayPosition && (
+        <TextOverlay $position={overlayPosition} src={textOverlayExample} />
+      )}
+      <StyledVideo controls key={videoUrl} preload="auto">
         <source src={videoUrl} type="video/mp4" />
       </StyledVideo>
     </VideoWrapper>

@@ -56,14 +56,14 @@ const pageSlice = createSlice({
       state.captionPosition = action.payload;
     },
     captionSectionComplete: (state) => {
-      state.currentTabId = TabIdEnum.Music;
+      state.currentTabId = TabIdEnum.Download;
     },
     musicSectionComplete: (state) => {
       state.currentTabId = TabIdEnum.Download;
     },
     uploadComplete: (state, action) => {
       const { videoUrl } = action.payload;
-      state.pageId = PageIdEnum.EditVideo;
+      state.currentTabId = TabIdEnum.Captions;
       state.videoUrl = videoUrl;
     },
   },

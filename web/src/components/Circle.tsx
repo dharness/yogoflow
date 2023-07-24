@@ -1,9 +1,12 @@
 import { FC } from "react";
 import styled from "styled-components/macro";
+import { palette } from "../utils/styleHelpers";
 
 const Circle = styled.div<{ $isActive: boolean }>`
-  background: ${(props) => (props.$isActive ? "#6706CE" : "#E9E4EF")};
-  color: ${(props) => (props.$isActive ? "white" : "#B1AAB7")};
+  background: ${(props) =>
+    props.$isActive ? palette.purples.shade70 : palette.greys.shade20};
+  color: ${(props) =>
+    props.$isActive ? palette.greys.white : palette.greys.shade45};
   width: 28px;
   height: 28px;
   display: flex;

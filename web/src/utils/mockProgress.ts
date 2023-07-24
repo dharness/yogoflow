@@ -14,10 +14,14 @@ export const makeMockProgress = (
   const promise = new Promise<void>((r) => (resolve = r));
   const msPerSecond = 1000;
   const maxValue = 100;
+  const maxAutoValue = 85;
   const intervalTime = (seconds * msPerSecond) / maxValue / precision;
   let progress = 0;
+  let canComplete = false;
 
   const intervalId = setInterval(() => {
+    if (progress >= maxAutoValue && !canComplete) return;
+
     progress += increment;
     onTick(progress);
     if (progress >= maxValue) {
@@ -29,6 +33,7 @@ export const makeMockProgress = (
   return {
     cancel: () => clearInterval(intervalId),
     complete: async () => {
+      canComplete = true;
       increment = 5 / precision;
       return promise;
     },

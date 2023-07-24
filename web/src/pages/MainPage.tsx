@@ -1,11 +1,6 @@
 import { useSelector } from "react-redux";
 import Panel from "../components/Panel";
-import {
-  TabIdEnum,
-  selectCurrentTabId,
-  sessionCancelled,
-  tabSelected,
-} from "../store/pageSlice";
+import { TabIdEnum, selectCurrentTabId, tabSelected } from "../store/pageSlice";
 import { useAppDispatch } from "../store/store";
 import styled from "styled-components/macro";
 import CaptionsSection from "./sections/CaptionsSection";
@@ -13,6 +8,10 @@ import GenerateSection from "./sections/GenerateSection";
 import TabBar from "../components/TabBar";
 import TabBarItem from "../components/TabBarItem";
 import UploadSection from "./sections/UploadSection";
+import {
+  RequestStatusEnum,
+  selectGenerateStatus,
+} from "../store/generateVideoSlice";
 
 // --- Constants ---
 
@@ -57,24 +56,25 @@ const PageLayout = styled.div`
 
 // --- Component ---
 
-const MainPage2 = () => {
+const MainPage = () => {
   const dispatch = useAppDispatch();
   const sectionId = useSelector(selectCurrentTabId);
   const activeConfig = tabConfigs.find(({ id }) => id === sectionId);
-
+  const status = useSelector(selectGenerateStatus);
+  const tabsEndabled =
+    status !== RequestStatusEnum.Pending &&
+    status !== RequestStatusEnum.Success;
   const onTabClicked = (tabId: TabIdEnum) => {
     dispatch(tabSelected({ tabId }));
   };
 
   return (
-    <Panel
-      titleText="Style your video"
-      onCloseClick={() => dispatch(sessionCancelled())}
-    >
+    <Panel titleText="Style your video">
       <PageLayout>
         <TabBar>
           {tabConfigs.map((tabConfig) => (
             <TabBarItem
+              enabled={tabsEndabled}
               key={tabConfig.id}
               title={tabConfig.title}
               symbol={tabConfig.symbol}
@@ -90,4 +90,4 @@ const MainPage2 = () => {
   );
 };
 
-export default MainPage2;
+export default MainPage;

@@ -8,12 +8,13 @@ const Layout = styled.div`
   flex-direction: column;
   justify-content: space-between;
   height: 100%;
-  margin-top: 20px;
+  padding-top: 52px;
 `;
 
 const UploadSection = () => {
   const dispatch = useAppDispatch();
   const onFileChanged = (file: File) => {
+    if (!file) return;
     const videoUrl = URL.createObjectURL(file);
     dispatch(uploadComplete({ videoUrl }));
   };

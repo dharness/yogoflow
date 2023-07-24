@@ -3,6 +3,7 @@ import uploadSymbolPath from "../assets/upload-symbol.svg";
 import { FC, useCallback, useRef } from "react";
 import Button from "./Button";
 import { useDropzone } from "react-dropzone";
+import { palette } from "../utils/styleHelpers";
 
 const Texts = styled.div`
   font-family: "Inter", sans-serif;
@@ -17,15 +18,14 @@ const PrimaryText = styled.div`
 `;
 
 const SecondaryText = styled.div`
-  color: #848385;
+  color: ${palette.greys.shade45};
   font-size: 13px;
   margin-top: 10px;
 `;
 
 const UploadSymbol = styled.img`
   width: 150px;
-  min-width: 150px;
-  margin-top: 80px;
+  min-height: 150px;
 `;
 
 const Layout = styled.div`
@@ -41,9 +41,9 @@ const DragDropOverlay = styled.div`
   position: absolute;
   bottom: 7%;
   width: 90%;
-  height: 90%;
+  height: 100%;
   border-radius: 20px;
-  border: 3px dotted #ccbcdc;
+  border: 3px dotted ${palette.purples.shade30};
 `;
 
 interface FileUploadProps {

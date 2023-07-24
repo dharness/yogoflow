@@ -21,16 +21,12 @@ const StyledPanel = styled.div`
 interface PanelProps {
   children: ReactNode;
   titleText: string;
-  onCloseClick: () => void;
 }
 
-const Panel: FC<PanelProps> = ({ titleText, onCloseClick, children }) => {
+const Panel: FC<PanelProps> = ({ titleText, children }) => {
   return (
     <StyledPanel>
-      <PanelTitleBar
-        titleText={titleText}
-        onCloseClick={onCloseClick}
-      ></PanelTitleBar>
+      <PanelTitleBar titleText={titleText}></PanelTitleBar>
       <PanelContent>{children}</PanelContent>
     </StyledPanel>
   );

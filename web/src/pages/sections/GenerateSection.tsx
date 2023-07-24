@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 import VideoPreview from "../../components/VideoPreview";
-import { sessionCancelled } from "../../store/pageSlice";
+import { selectVideoUrl, sessionCancelled } from "../../store/pageSlice";
 import generatePromptHero from "./../../assets/generate-prompt-hero.png";
 import styled from "styled-components/macro";
 import Button, { ButtonVariantsEnum } from "../../components/Button";
@@ -14,6 +14,7 @@ import {
   selectLoadingProgess,
 } from "../../store/generateVideoSlice";
 import LoadingWheel from "../../components/LoadingWheel";
+import { palette } from "../../utils/styleHelpers";
 
 const Layout = styled.div`
   display: flex;
@@ -36,6 +37,7 @@ const PromptImg = styled.img`
   margin-top: 15px;
   width: 160px;
   min-width: 160px;
+  min-height: 166px;
 `;
 
 const PromptTextPrimary = styled.div`
@@ -47,7 +49,7 @@ const PromptTextPrimary = styled.div`
 
 const PromptTextSecondary = styled.div`
   font-family: "Inter", sans-serif;
-  color: #848385;
+  color: ${palette.greys.shade45};
   font-size: 13px;
   margin-top: 9px;
 `;
@@ -55,7 +57,8 @@ const PromptTextSecondary = styled.div`
 const GenerateSection = () => {
   const dispatch = useAppDispatch();
   const downloadLink = useRef<HTMLAnchorElement>(null);
-  const videoUrl = useSelector(selectGeneratedVideoUrl);
+  const genereatedVideoUrl = useSelector(selectGeneratedVideoUrl);
+  const originalVideoUrl = useSelector(selectVideoUrl);
   const status = useSelector(selectGenerateStatus);
   const isLoading = status === RequestStatusEnum.Pending;
   const loadingPercent = useSelector(selectLoadingProgess);
@@ -70,7 +73,7 @@ const GenerateSection = () => {
       </Button>
       <Button onClick={() => downloadLink.current?.click()}>Download</Button>
       <a
-        href={videoUrl}
+        href={genereatedVideoUrl}
         ref={downloadLink}
         style={{ display: "none" }}
         download={true}
@@ -100,7 +103,8 @@ const GenerateSection = () => {
 
   const renderContent = () => {
     if (isLoading) return <LoadingWheel percent={loadingPercent} />;
-    if (videoUrl) return <VideoPreview videoUrl={videoUrl} />;
+    if (genereatedVideoUrl)
+      return <VideoPreview videoUrl={genereatedVideoUrl} />;
     return renderGeneratePrompt();
   };
 
@@ -108,7 +112,9 @@ const GenerateSection = () => {
     <Layout>
       {renderContent()}
       <Footer>
-        {videoUrl ? renderDownloadButtons() : renderGenerateButtons(isLoading)}
+        {genereatedVideoUrl
+          ? renderDownloadButtons()
+          : renderGenerateButtons(isLoading || !originalVideoUrl)}
       </Footer>
     </Layout>
   );

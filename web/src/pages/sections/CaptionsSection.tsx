@@ -19,7 +19,13 @@ const Layout = styled.div`
   flex-direction: column;
   justify-content: space-between;
   height: 100%;
-  margin-top: 20px;
+  margin-top: 40px;
+`;
+
+const Description = styled.div`
+  margin-top: 13px;
+  font-size: 23px;
+  font-weight: 300;
 `;
 
 const Content = styled.div`
@@ -31,6 +37,10 @@ const Footer = styled.div`
   width: 100%;
   display: flex;
   justify-content: end;
+`;
+
+const FormWrapper = styled.div`
+  width: 280px;
 `;
 
 const CaptionsSection = () => {
@@ -45,18 +55,23 @@ const CaptionsSection = () => {
   return (
     <Layout>
       <Content>
-        <Form>
-          <FormItem
-            label="Position"
-            el={
-              <Dropdown
-                selected={selectedPosition}
-                options={Object.values(CaptionPositionEnum)}
-                onChange={onPositionSelected}
-              />
-            }
-          />
-        </Form>
+        <FormWrapper>
+          <Form>
+            <FormItem
+              label="Position:"
+              el={
+                <Dropdown
+                  selected={selectedPosition}
+                  options={Object.values(CaptionPositionEnum)}
+                  onChange={onPositionSelected}
+                />
+              }
+            />
+            <Description>
+              Choose where you want your captions to appear on the video.
+            </Description>
+          </Form>
+        </FormWrapper>
         <VideoPreview videoUrl={videoUrl} overlayPosition={selectedPosition} />
       </Content>
       <Footer>
