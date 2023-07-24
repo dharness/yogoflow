@@ -7,6 +7,7 @@ from requests.adapters import HTTPAdapter, Retry
 from yogoflow.config import DEFAULT_POSE, ROBOFLOW_API_KEY, ROBOFLOW_MODEL_NAME, ROBOFLOW_MODEL_VERSION, ROBOFLOW_URL
 from yogoflow.services.encoding import get_base64
 
+
 """
 Model for predicting yoga pose from image
 """

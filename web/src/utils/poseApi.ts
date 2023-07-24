@@ -9,15 +9,12 @@ export async function generateVideo(
   captionPosition: CaptionPositionEnum,
   onProgress: (progress: number) => void
 ) {
+  // Estimate a 25 second download
   const progressSeconds = 25;
   const mockProgress = makeMockProgress(progressSeconds, onProgress);
 
   const formdata = new FormData();
-  formdata.append(
-    "video_file",
-    inputVideo,
-    "/C:/Users/Dylan Harness/Desktop/yogo_demo_01.mp4"
-  );
+  formdata.append("video_file", inputVideo);
   formdata.append("caption_position", captionPosition);
 
   const config: AxiosRequestConfig = {
@@ -30,7 +27,12 @@ export async function generateVideo(
     responseType: "blob",
   };
 
-  const response = await axios(config);
-  await mockProgress.complete();
-  return response.data;
+  try {
+    const response = await axios(config);
+    await mockProgress.complete();
+    return response.data;
+  } catch (error) {
+    mockProgress.cancel();
+    throw error;
+  }
 }

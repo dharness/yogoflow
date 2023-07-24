@@ -1,6 +1,10 @@
 from moviepy.editor import AudioFileClip, VideoFileClip, ImageClip, CompositeVideoClip
 from yogoflow.config import BACKGROUND_TRACKS, YOGA_POSE_NAMES
 
+"""
+Class for generating styled videos with text overlay
+"""
+
 
 class StyledVideo:
   def __init__(self, file_path):
