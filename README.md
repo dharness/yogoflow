@@ -1,8 +1,10 @@
-# Robo-Fit
+# yogoflow
 
 Stay fit during those long work days with a guided exercise routine.
 
 ### Local Development:
+
+Frontend:
 
 ```
 cd web
@@ -10,19 +12,10 @@ npm install
 npm run dev
 ```
 
-### Deployment:
-
-You will need a vercel account and the vercel CLI:
-https://vercel.com/docs/cli
-
-To deploy a preview:
+Server:
 
 ```
-vercel
-```
-
-To deploy to production:
-
-```
-vercel --prod
+cd server
+pip install -r requirements.txt
+python app.py
 ```
