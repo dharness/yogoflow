@@ -3,10 +3,10 @@ import uploadSymbolPath from "../assets/upload-symbol.svg";
 import { FC, useCallback, useRef } from "react";
 import Button from "./Button";
 import { useDropzone } from "react-dropzone";
-import { palette } from "../utils/styleHelpers";
+import { fonts, palette } from "../utils/styleHelpers";
 
 const Texts = styled.div`
-  font-family: "Inter", sans-serif;
+  font-family: ${fonts.inter};
   text-align: center;
   margin-top: 30px;
   margin-bottom: 30px;

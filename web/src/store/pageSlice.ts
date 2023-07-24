@@ -10,7 +10,6 @@ export enum CaptionPositionEnum {
 export enum TabIdEnum {
   Upload = "Upload",
   Captions = "Captions",
-  Music = "Music",
   Download = "Download",
 }
 
@@ -58,9 +57,6 @@ const pageSlice = createSlice({
     captionSectionComplete: (state) => {
       state.currentTabId = TabIdEnum.Download;
     },
-    musicSectionComplete: (state) => {
-      state.currentTabId = TabIdEnum.Download;
-    },
     uploadComplete: (state, action) => {
       const { videoUrl } = action.payload;
       state.currentTabId = TabIdEnum.Captions;
@@ -80,7 +76,6 @@ export const {
   uploadComplete,
   captionPositionChanged,
   captionSectionComplete,
-  musicSectionComplete,
   tabSelected,
 } = pageSlice.actions;
 export default pageSlice.reducer;

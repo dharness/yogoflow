@@ -10,14 +10,14 @@ const Layout = styled.div`
 
 interface FormItemProps {
   label?: string;
-  el: ReactNode;
+  element: ReactNode;
 }
 
-const FormItem: FC<FormItemProps> = ({ label, el }) => {
+const FormItem: FC<FormItemProps> = ({ label, element }) => {
   return (
     <Layout>
       {label && <label>{label}</label>}
-      {el}
+      {element}
     </Layout>
   );
 };

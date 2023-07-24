@@ -11,8 +11,8 @@ import {
 import styled from "styled-components/macro";
 import Button from "../../components/Button";
 import { useAppDispatch } from "../../store/store";
-import FormItem from "../../components/FormItem";
-import Form from "../../components/Form";
+import FormItem from "../../components/Form/FormItem";
+import Form from "../../components/Form/Form";
 
 const Layout = styled.div`
   display: flex;
@@ -59,7 +59,7 @@ const CaptionsSection = () => {
           <Form>
             <FormItem
               label="Position:"
-              el={
+              element={
                 <Dropdown
                   selected={selectedPosition}
                   options={Object.values(CaptionPositionEnum)}

@@ -1,12 +1,12 @@
 import { useSelector } from "react-redux";
-import Panel from "../components/Panel";
+import Panel from "../components/Panel/Panel";
 import { TabIdEnum, selectCurrentTabId, tabSelected } from "../store/pageSlice";
 import { useAppDispatch } from "../store/store";
 import styled from "styled-components/macro";
 import CaptionsSection from "./sections/CaptionsSection";
 import GenerateSection from "./sections/GenerateSection";
-import TabBar from "../components/TabBar";
-import TabBarItem from "../components/TabBarItem";
+import TabBar from "../components/TabBar/TabBar";
+import TabBarItem from "../components/TabBar/TabBarItem";
 import UploadSection from "./sections/UploadSection";
 import {
   RequestStatusEnum,

@@ -1,7 +1,6 @@
 import styled from "styled-components/macro";
-import xIconPath from "../assets/x-icon.svg";
 import { FC } from "react";
-import { palette } from "../utils/styleHelpers";
+import { fonts } from "../../utils/styleHelpers";
 
 const StyledPanelTitleBar = styled.div`
   height: 60px;
@@ -15,7 +14,7 @@ const StyledPanelTitleBar = styled.div`
 
 const Title = styled.div`
   font-size: 38px;
-  font-family: "Dongle", sans-serif;
+  font-family: ${fonts.dongle};
   font-weight: 700;
   margin-top: 10px;
 `;

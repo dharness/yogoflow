@@ -7,4 +7,4 @@ dev:
 	flask --app yogoflow.app run --debug
 
 run:
-	flask --app yogoflow.app run
+	gunicorn -w 4 'yogoflow.app:create_app()'

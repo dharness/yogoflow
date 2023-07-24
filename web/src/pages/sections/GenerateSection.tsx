@@ -14,7 +14,7 @@ import {
   selectLoadingProgess,
 } from "../../store/generateVideoSlice";
 import LoadingWheel from "../../components/LoadingWheel";
-import { palette } from "../../utils/styleHelpers";
+import { fonts, palette } from "../../utils/styleHelpers";
 
 const Layout = styled.div`
   display: flex;
@@ -41,14 +41,14 @@ const PromptImg = styled.img`
 `;
 
 const PromptTextPrimary = styled.div`
-  font-family: "Inter", sans-serif;
+  font-family: ${fonts.inter};
   font-weight: bold;
   font-size: 20px;
   margin-top: 23px;
 `;
 
 const PromptTextSecondary = styled.div`
-  font-family: "Inter", sans-serif;
+  font-family: ${fonts.inter};
   color: ${palette.greys.shade45};
   font-size: 13px;
   margin-top: 9px;

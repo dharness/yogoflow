@@ -1,8 +1,8 @@
 import { FC } from "react";
 import styled from "styled-components/macro";
-import Circle from "./Circle";
+import Circle from "./../Circle";
 import TabBarIndicator from "./TabBarIndicator";
-import { fonts, palette } from "../utils/styleHelpers";
+import { fonts, palette } from "../../utils/styleHelpers";
 
 const getFontColor = (isActive: boolean, enabled: boolean) => {
   if (isActive) {

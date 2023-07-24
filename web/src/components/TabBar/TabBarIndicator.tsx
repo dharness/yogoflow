@@ -1,6 +1,6 @@
 import { FC } from "react";
 import styled from "styled-components/macro";
-import { palette } from "../utils/styleHelpers";
+import { palette } from "../../utils/styleHelpers";
 
 const StyledActivePageBar = styled.div`
   width: 100%;

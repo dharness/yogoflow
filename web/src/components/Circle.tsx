@@ -1,8 +1,8 @@
 import { FC } from "react";
 import styled from "styled-components/macro";
-import { palette } from "../utils/styleHelpers";
+import { fonts, palette } from "../utils/styleHelpers";
 
-const Circle = styled.div<{ $isActive: boolean }>`
+const CircleSymbol = styled.div<{ $isActive: boolean }>`
   background: ${(props) =>
     props.$isActive ? palette.purples.shade70 : palette.greys.shade20};
   color: ${(props) =>
@@ -13,19 +13,19 @@ const Circle = styled.div<{ $isActive: boolean }>`
   justify-content: center;
   align-items: center;
   border-radius: 50%;
-  font-family: "Inter", sans-serif;
+  font-family: ${fonts.inter};
   font-size: 18px;
   font-style: normal;
   font-weight: 800;
 `;
 
-interface SymbolIconProps {
+interface CircleProps {
   symbol: string;
   isActive: boolean;
 }
 
-const SymbolIcon: FC<SymbolIconProps> = ({ symbol, isActive }) => {
-  return <Circle $isActive={isActive}>{symbol}</Circle>;
+const Circle: FC<CircleProps> = ({ symbol, isActive }) => {
+  return <CircleSymbol $isActive={isActive}>{symbol}</CircleSymbol>;
 };
 
-export default SymbolIcon;
+export default Circle;

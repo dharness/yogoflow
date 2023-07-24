@@ -1,5 +1,6 @@
 import styled from "styled-components/macro";
 import logoImg from "../assets/logo.png";
+import { fonts } from "../utils/styleHelpers";
 
 const StyledHeader = styled.div`
   padding: 40px;
@@ -12,7 +13,7 @@ const StyledHeader = styled.div`
 const Title = styled.div`
   color: white;
   font-size: 45px;
-  font-family: "Dongle", sans-serif;
+  font-family: ${fonts.dongle};
   font-weight: 700;
   display: flex;
   justify-content: center;
